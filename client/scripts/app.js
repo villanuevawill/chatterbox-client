@@ -15,14 +15,18 @@ var app = {
   lastDate: new Date().toISOString(),
 
   get: function(room, lastDate){
-    // var wherestring = { where: {roomname: room},
-    //                            createdAt: { $gte : {__type:'Date',
-    //                                                    iso: lastDate }}},
-    //                                order: '-createdAt', limit:10 };
-    //
-    var wherestring = {where: {roomname: room}, order: '-createdAt'};
-    wherestring = JSON.stringify(wherestring);
+     // var wherestring = { where: {roomname: room},
+     //                            // createdAt: {$gte: {__type: 'Date',
+     //                            //                       iso: lastDate }}},
+     //                            order: '-createdAt', limit:10 };
 
+    var wherestring1 = 'where={"createdAt":{"$gte":{"__type":"Date","iso":"2014-06-16T17:48:21.944Z"}},"roomname":"lobby"}';
+    var wherestring2 = 'order="-createdAt"';
+    var wherestring3 = 'limit=10';
+    // var wherestring = {where:{"createdAt":{"$gte":{"__type":"Date","iso":"2014-06-16T17:48:21.944Z"}},"roomname":"lobby"}};
+
+    // wherestring = $.param(wherestring);
+    console.log(wherestring)
 
    $.get('https://api.parse.com/1/classes/chatterbox/',
     wherestring,
@@ -78,7 +82,7 @@ var app = {
 };
 
 $(function(){
-  app.get('will');
+  app.get('lobby', app.lastDate);
   $('.sendButton').on('click',function(event){
       var message = $('.messages').val();
       createMessage(message);
