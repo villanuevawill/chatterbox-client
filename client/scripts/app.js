@@ -2,7 +2,7 @@
 //
 
 var app = {
-  init: function(){
+  init: function() {
     // initial populate
     // set last date
 
@@ -14,30 +14,26 @@ var app = {
 
   lastDate: new Date().toISOString(),
 
-  get: function(room, lastDate){
-     // var wherestring = { where: {roomname: room},
-     //                            // createdAt: {$gte: {__type: 'Date',
-     //                            //                       iso: lastDate }}},
-     //                            order: '-createdAt', limit:10 };
+  get: function(room, lastDate) {
+    var wherestring = {roomname: room , createdAt: {$gte: {__type: 'Date', iso: lastDate }}};
 
-    var wherestring1 = 'where={"createdAt":{"$gte":{"__type":"Date","iso":"2014-06-16T17:48:21.944Z"}},"roomname":"lobby"}';
-    var wherestring2 = 'order="-createdAt"';
-    var wherestring3 = 'limit=10';
-    // var wherestring = {where:{"createdAt":{"$gte":{"__type":"Date","iso":"2014-06-16T17:48:21.944Z"}},"roomname":"lobby"}};
-
-    // wherestring = $.param(wherestring);
-    console.log(wherestring)
-
-   $.get('https://api.parse.com/1/classes/chatterbox/',
-    wherestring,
-    function(data){console.log(data);
-      if(data.results){
-        data.results.forEach(function(result){
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.parse.com/1/classes/chatterbox/',
+      data: {where: JSON.stringify(wherestring), order: '-createdAt', limit: 10},
+      contentType: "application/json",
+      success: function(data) {
+        if (data.results) {
+          data.results.forEach(function(result) {
             app.displayMessage(app.parseMessage(result));
           });
+        }
       }
+
+
     });
   },
+
 
   parseMessage: function(data) {
     var message = {};
@@ -47,11 +43,11 @@ var app = {
     return message;
   },
 
-  displayMessage: function(message){
+  displayMessage: function(message) {
     var text = message.text;
     var time = message.time;
     var username = message.username;
-    var display = '<li>'+time+'- '+username+': '+text +'</li>';
+    var display = '<li>' + time + '- ' + username + ': ' + text + '</li>';
     $('.chatMessages').append(display);
   },
 
@@ -75,21 +71,21 @@ var app = {
   // },
 
 
-  createMessage:function(response){
+  createMessage: function(response) {
 
   },
 
 };
 
-$(function(){
+$(function() {
   app.get('lobby', app.lastDate);
-  $('.sendButton').on('click',function(event){
-      var message = $('.messages').val();
-      createMessage(message);
-    });
+  $('.sendButton').on('click', function(event) {
+    var message = $('.messages').val();
+    createMessage(message);
+  });
 
-// app.send('mitch', 'HOLA', 'will');
-// app.displayMessage({text:'hola', time: 'today', username: 'mitch'});
+  // app.send('mitch', 'HOLA', 'will');
+  // app.displayMessage({text:'hola', time: 'today', username: 'mitch'});
 
 });
 
