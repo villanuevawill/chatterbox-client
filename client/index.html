@@ -9,12 +9,22 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+      <div class ="chatroom"></div>
+      <div class="messageContainer">
       <ul class ="chatMessages">
       </ul>
+      </div>
     <form>
       <textarea rows="2" cols="60" class = 'messages'></textarea>
       <br>
-      <input type="button" value="Send" class ="sendButton">
+      <input type="button" value="Send" class = "sendButton">
+      <select>
+      </select>
+      <input type="text" placeholder="username" class="username">
+      <input type="button" value="send" class = "sendUser">
+      <input type="text" placeholder="username" class="username">
+      <input type="button" value="send" class = "sendUser">
+      </form>
     </div>
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>

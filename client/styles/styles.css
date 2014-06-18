@@ -85,3 +85,8 @@ form input[type=text] {
 textarea {
     resize: none;
 }
+
+.messageContainer {
+    height: 150px;
+    overflow: auto;
+}
