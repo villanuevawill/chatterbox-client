@@ -90,3 +90,6 @@ textarea {
     height: 150px;
     overflow: auto;
 }
+.bold{
+    font-weight: bold;
+}
