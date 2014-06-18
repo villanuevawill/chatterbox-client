@@ -46,7 +46,7 @@ var app = {
           $('.sendButton').on('click', function(event) {
             var message = $('.messages').val();
             app.send(app.createMessage(message));
-          });
+          });t
           $('select').change(function(e){
             app.chatroom = $('select option:selected').text();
             $('.chatroom').text(app.chatroom);
@@ -63,6 +63,7 @@ var app = {
             app.username = user;
             $('.username').val('');
           });
+          $('.')
         }
       }
     });
